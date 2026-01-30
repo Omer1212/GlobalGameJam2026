@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -43,9 +44,19 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag.Equals("Mask"))
         {
-            collision.gameObject.transform.SetParent(transform);
-            collision.gameObject.transform.localPosition = new Vector3(0,0,0);
-            //pool.ReturnObject(collision.gameObject);
+            GameObject mask = collision.gameObject;
+            mask.transform.SetParent(transform);
+            switch(mask.GetComponent<MaskManager>().GetMaskType())
+            {
+                case MaskType.RedMask:
+                    mask.transform.localPosition = new Vector3(0.0651580021f, -0.0199999996f, 0);
+                break;
+
+                default:
+                    mask.transform.localPosition = new Vector3(0,0,0);
+                break;
+            }
+
         }
     }
 }

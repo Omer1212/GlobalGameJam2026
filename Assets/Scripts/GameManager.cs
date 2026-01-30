@@ -1,9 +1,10 @@
 using UnityEngine;
 
-public enum MaskType {GreenMask, RedMask, BlueMask, YellowMask}
+public enum MaskType {GreenMask = 0, RedMask = 1, BlueMask = 2, YellowMask = 3}
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] Sprite[] maskSprites;
     public ObjectPool pool;
     public GameObject player;
 
@@ -15,7 +16,7 @@ public class GameManager : MonoBehaviour
 
         for(int i = 0; i < NUM_OF_MASKS; i++)
         {
-            GameObject obj = pool.GetObject();
+            GameObject mask = pool.GetObject();
 
             int xRandom = UnityEngine.Random.Range(0, 2) == 0
                         ? UnityEngine.Random.Range(-10, -2)
@@ -29,10 +30,16 @@ public class GameManager : MonoBehaviour
             float moveX = playerPosition.x + xRandom;
             float moveY = playerPosition.y + yRandom;
 
-            obj.transform.Translate(moveX, moveY, 0);
-            //obj.GetComponent<SpriteRenderer>().color = Random.ColorHSV();
-            obj.GetComponent<MaskManager>().SetMaskType(MaskType.GreenMask);
+            mask.transform.Translate(moveX, moveY, 0);
 
+            MaskType maskType = (MaskType)Random.Range(0,4);
+            mask.GetComponent<MaskManager>().SetMaskType(maskType);
+            SpriteRenderer maskSpriteRenderer = mask.GetComponent<SpriteRenderer>();
+            maskSpriteRenderer.sprite = maskSprites[(int)maskType];
+            if(maskType == MaskType.RedMask)
+            {
+                mask.transform.localScale = new Vector3(0.696743786f, 0.696743786f, 0.696743786f);
+            }
         }
     }
 }

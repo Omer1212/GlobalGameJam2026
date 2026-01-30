@@ -620,11 +620,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 883a544e5e1ceb14588102c8af815083, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  maskSprites:
-  - {fileID: 7616773668994174413, guid: 29217afc45a555c4ca41741544a75421, type: 3}
-  - {fileID: 2399575272447243231, guid: 25db951f7e7ad2d45b81de79bc08b2be, type: 3}
-  - {fileID: 7616773668994174413, guid: 29217afc45a555c4ca41741544a75421, type: 3}
-  - {fileID: 2399575272447243231, guid: 25db951f7e7ad2d45b81de79bc08b2be, type: 3}
   pool: {fileID: 2097574614}
   player: {fileID: 751001742}
 --- !u!4 &1405452765
