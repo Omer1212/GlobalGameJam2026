@@ -43,7 +43,9 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag.Equals("Mask"))
         {
-            pool.ReturnObject(collision.gameObject);
+            collision.gameObject.transform.SetParent(transform);
+            collision.gameObject.transform.localPosition = new Vector3(0,0,0);
+            //pool.ReturnObject(collision.gameObject);
         }
     }
 }

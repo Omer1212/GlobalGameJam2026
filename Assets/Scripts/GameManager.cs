@@ -1,5 +1,7 @@
 using UnityEngine;
 
+public enum MaskType {GreenMask, RedMask, BlueMask, YellowMask}
+
 public class GameManager : MonoBehaviour
 {
     public ObjectPool pool;
@@ -28,7 +30,9 @@ public class GameManager : MonoBehaviour
             float moveY = playerPosition.y + yRandom;
 
             obj.transform.Translate(moveX, moveY, 0);
-            obj.GetComponent<SpriteRenderer>().color = Random.ColorHSV();
+            //obj.GetComponent<SpriteRenderer>().color = Random.ColorHSV();
+            obj.GetComponent<MaskManager>().SetMaskType(MaskType.GreenMask);
+
         }
     }
 }

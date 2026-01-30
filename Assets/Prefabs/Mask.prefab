@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6695512290539108034}
   - component: {fileID: 9127767855777389705}
   - component: {fileID: 7695953015171584425}
+  - component: {fileID: 8148857941006505322}
   m_Layer: 0
   m_Name: Mask
   m_TagString: Mask
@@ -28,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.497, z: 0}
-  m_LocalScale: {x: 1.7849, y: 1.7849, z: 1.7849}
+  m_LocalScale: {x: 0.36296138, y: 0.3629614, z: 0.36296138}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -80,9 +81,9 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 7616773668994174413, guid: 29217afc45a555c4ca41741544a75421, type: 3}
   m_Color: {r: 0.011213911, g: 0.8490566, b: 0.8232066, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -128,3 +129,16 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
+--- !u!114 &8148857941006505322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1078708907139267945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8e94c1956d4edf47892ecffc2cf85cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MaskManager
+  type: 0
