@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float currentSpeed = 5f;
     [SerializeField] float steerSpeed = 5f;
 
+    public ObjectPool pool;
+
     void Update()
     {
         float move = 0f;
@@ -39,7 +41,9 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("What?!");
-        Destroy(collision.gameObject);
+        if (collision.gameObject.tag.Equals("Mask"))
+        {
+            pool.ReturnObject(collision.gameObject);
+        }
     }
 }
