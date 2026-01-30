@@ -621,7 +621,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   maskSprites:
-  - {fileID: 7616773668994174413, guid: 29217afc45a555c4ca41741544a75421, type: 3}
+  - {fileID: -1635385786482713504, guid: 0c4089e3b76a60d479ce006f00ca3f85, type: 3}
   - {fileID: 2399575272447243231, guid: 25db951f7e7ad2d45b81de79bc08b2be, type: 3}
   - {fileID: 7616773668994174413, guid: 29217afc45a555c4ca41741544a75421, type: 3}
   - {fileID: 2399575272447243231, guid: 25db951f7e7ad2d45b81de79bc08b2be, type: 3}

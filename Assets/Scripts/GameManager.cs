@@ -16,30 +16,39 @@ public class GameManager : MonoBehaviour
 
         for(int i = 0; i < NUM_OF_MASKS; i++)
         {
-            GameObject mask = pool.GetObject();
+            MaskBuild(playerPosition);
+        }
+    }
 
-            int xRandom = UnityEngine.Random.Range(0, 2) == 0
-                        ? UnityEngine.Random.Range(-10, -2)
-                        : UnityEngine.Random.Range(3, 11);
+    private void MaskBuild(Vector3 playerPosition)
+    {
+        GameObject mask = pool.GetObject();
 
-            int yRandom = UnityEngine.Random.Range(0, 2) == 0
-                        ? UnityEngine.Random.Range(-10, -2)
-                        : UnityEngine.Random.Range(3, 11);
+        int xRandom = Random.Range(0, 2) == 0
+                    ? Random.Range(-10, -2)
+                    : Random.Range(3, 11);
+
+        int yRandom = Random.Range(0, 2) == 0
+                    ? Random.Range(-10, -2)
+                    : Random.Range(3, 11);
 
 
-            float moveX = playerPosition.x + xRandom;
-            float moveY = playerPosition.y + yRandom;
+        float moveX = playerPosition.x + xRandom;
+        float moveY = playerPosition.y + yRandom;
 
-            mask.transform.Translate(moveX, moveY, 0);
+        mask.transform.Translate(moveX, moveY, 0);
 
-            MaskType maskType = (MaskType)Random.Range(0,4);
-            mask.GetComponent<MaskManager>().SetMaskType(maskType);
-            SpriteRenderer maskSpriteRenderer = mask.GetComponent<SpriteRenderer>();
-            maskSpriteRenderer.sprite = maskSprites[(int)maskType];
-            if(maskType == MaskType.RedMask)
-            {
-                mask.transform.localScale = new Vector3(0.696743786f, 0.696743786f, 0.696743786f);
-            }
+        MaskType maskType = (MaskType)Random.Range(0, 4);
+        mask.GetComponent<MaskManager>().SetMaskType(maskType);
+        SpriteRenderer maskSpriteRenderer = mask.GetComponent<SpriteRenderer>();
+        maskSpriteRenderer.sprite = maskSprites[(int)maskType];
+        if (maskType == MaskType.RedMask)
+        {
+            mask.transform.localScale = new Vector3(0.696743786f, 0.696743786f, 0.696743786f);
+        }
+        if (maskType == MaskType.GreenMask)
+        {
+            mask.transform.localScale = new Vector3(0.610097587f, 0.610097587f, 0.610097587f);
         }
     }
 }

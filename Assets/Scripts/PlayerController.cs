@@ -11,6 +11,11 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        MovePlayer();
+    }
+
+    private void MovePlayer()
+    {
         float move = 0f;
         float steer = 0f;
 
@@ -37,12 +42,11 @@ public class PlayerController : MonoBehaviour
 
         transform.Translate(0, moveAmount, 0);
         transform.Translate(steerAmount, 0, 0);
-        //transform.Rotate(0, 0, steerAmount);
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag.Equals("Mask"))
+        if (collision.gameObject.CompareTag("Mask"))
         {
             GameObject mask = collision.gameObject;
             mask.transform.SetParent(transform);
@@ -52,6 +56,10 @@ public class PlayerController : MonoBehaviour
                     mask.transform.localPosition = new Vector3(0.0651580021f, -0.0199999996f, 0);
                 break;
 
+                case MaskType.GreenMask:
+                    mask.transform.localPosition = new Vector3(0.0299999993f, -0.310000002f, 0f);
+                break;
+                
                 default:
                     mask.transform.localPosition = new Vector3(0,0,0);
                 break;
