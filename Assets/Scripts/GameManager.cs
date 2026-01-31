@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public enum MaskType {GreenMask = 0, RedMask = 1, BlueMask = 2, YellowMask = 3}
 
@@ -20,7 +21,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    
+    void Update()
+    {
+        if(Keyboard.current.escapeKey.isPressed)
+        {
+            Debug.Log("Quitting the game.");
+            Application.Quit();
+        }
+    }
+
     private void MaskBuild(Vector3 playerPosition)
     {
         GameObject mask = pool.GetObject();
