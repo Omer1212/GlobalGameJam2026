@@ -24,4 +24,9 @@ public class ObjectPool : MonoBehaviour
         obj.SetActive(false);
         pool.Enqueue(obj);
     }
+
+    public int GetCountOfObjects()
+    {
+        return pool.Count;
+    }
 }

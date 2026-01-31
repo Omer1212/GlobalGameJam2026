@@ -40,6 +40,13 @@ public class PlayerController : MonoBehaviour
         if(currentMask != null && (Time.time - maskStartTime) > 5)
         {
             RemoveMask();
+            if(pool.GetCountOfObjects() == GameManager.NUM_OF_MASKS) //All masks are collected
+            {
+                for(int i = 0; i < GameManager.NUM_OF_MASKS; i++)
+                {
+                    FindFirstObjectByType<GameManager>().MaskBuild(transform.position);
+                }
+            }
         }
     }
 

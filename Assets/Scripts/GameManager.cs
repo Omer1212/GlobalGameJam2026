@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public ObjectPool pool;
     public GameObject player;
 
-    const int NUM_OF_MASKS = 10;
+    public const int NUM_OF_MASKS = 10;
 
     void Start()
     {
@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void MaskBuild(Vector3 playerPosition)
+    public void MaskBuild(Vector3 playerPosition)
     {
         GameObject mask = pool.GetObject();
 
@@ -43,10 +43,10 @@ public class GameManager : MonoBehaviour
                     : Random.Range(3, 11);
 
 
-        float moveX = playerPosition.x + xRandom;
-        float moveY = playerPosition.y + yRandom;
+        float xCor = playerPosition.x + xRandom;
+        float yCor = playerPosition.y + yRandom;
 
-        mask.transform.Translate(moveX, moveY, 0);
+        mask.transform.position = new Vector3(xCor, yCor, 0);
 
         MaskType maskType = (MaskType)Random.Range(0, 4);
         mask.GetComponent<MaskManager>().SetMaskType(maskType);
