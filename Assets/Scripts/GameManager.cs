@@ -60,5 +60,9 @@ public class GameManager : MonoBehaviour
         {
             mask.transform.localScale = new Vector3(0.610097587f, 0.610097587f, 0.610097587f);
         }
+        if(maskType == MaskType.YellowMask)
+        {
+            mask.transform.localScale = new Vector3(0.654830813f, 0.654830813f, 0.654830813f);
+        }
     }
 }

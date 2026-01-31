@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -6,6 +7,8 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] float currentSpeed = 5f;
     [SerializeField] float steerSpeed = 5f;
+
+    GameObject currentMask;
 
     public ObjectPool pool;
 
@@ -48,18 +51,28 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Mask"))
         {
+            if(currentMask != null)
+            {
+                pool.ReturnObject(currentMask);
+                currentMask.transform.SetParent(null, true);
+            }
             GameObject mask = collision.gameObject;
+            currentMask = mask;
             mask.transform.SetParent(transform);
             switch(mask.GetComponent<MaskManager>().GetMaskType())
             {
                 case MaskType.RedMask:
-                    mask.transform.localPosition = new Vector3(0.0651580021f, -0.0199999996f, 0);
+                    mask.transform.localPosition = new Vector3(0.0651580021f, -0.0199999996f, 0f);
                 break;
 
                 case MaskType.GreenMask:
                     mask.transform.localPosition = new Vector3(0.0299999993f, -0.310000002f, 0f);
                 break;
-                
+
+                case MaskType.YellowMask:
+                    mask.transform.localPosition = new Vector3(-0.319999993f,0.419999987f, 0f);
+                break;
+
                 default:
                     mask.transform.localPosition = new Vector3(0,0,0);
                 break;
