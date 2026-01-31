@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float steerSpeed = 5f;
     GameObject currentMask;
     public TextMeshProUGUI scoreText;
-
+    public AudioClip pickupSound;
     public ObjectPool pool;
 
     int score;
@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Mask"))
         {
             PickMask(collision);
+            GetComponent<AudioSource>().PlayOneShot(pickupSound);
             score++;
             scoreText.text = $"SCORE: {score}";
         }
