@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    
     private void MaskBuild(Vector3 playerPosition)
     {
         GameObject mask = pool.GetObject();
