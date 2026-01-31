@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -7,10 +8,12 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] float currentSpeed = 5f;
     [SerializeField] float steerSpeed = 5f;
-
     GameObject currentMask;
+    public TextMeshProUGUI scoreText;
 
     public ObjectPool pool;
+
+    int score;
 
     void Update()
     {
@@ -51,33 +54,39 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Mask"))
         {
-            if(currentMask != null)
-            {
-                pool.ReturnObject(currentMask);
-                currentMask.transform.SetParent(null, true);
-            }
-            GameObject mask = collision.gameObject;
-            currentMask = mask;
-            mask.transform.SetParent(transform);
-            switch(mask.GetComponent<MaskManager>().GetMaskType())
-            {
-                case MaskType.RedMask:
-                    mask.transform.localPosition = new Vector3(0.0651580021f, -0.0199999996f, 0f);
+            PickMask(collision);
+            score++;
+            scoreText.text = $"SCORE: {score}";
+        }
+    }
+
+    private void PickMask(Collider2D collision)
+    {
+        if (currentMask != null)
+        {
+            pool.ReturnObject(currentMask);
+            currentMask.transform.SetParent(null, true);
+        }
+        GameObject mask = collision.gameObject;
+        currentMask = mask;
+        mask.transform.SetParent(transform);
+        switch (mask.GetComponent<MaskManager>().GetMaskType())
+        {
+            case MaskType.RedMask:
+                mask.transform.localPosition = new Vector3(0.0651580021f, -0.0199999996f, 0f);
                 break;
 
-                case MaskType.GreenMask:
-                    mask.transform.localPosition = new Vector3(0.0299999993f, -0.310000002f, 0f);
+            case MaskType.GreenMask:
+                mask.transform.localPosition = new Vector3(0.0299999993f, -0.310000002f, 0f);
                 break;
 
-                case MaskType.YellowMask:
-                    mask.transform.localPosition = new Vector3(-0.319999993f,0.419999987f, 0f);
+            case MaskType.YellowMask:
+                mask.transform.localPosition = new Vector3(-0.319999993f, 0.419999987f, 0f);
                 break;
 
-                default:
-                    mask.transform.localPosition = new Vector3(0,0,0);
+            default:
+                mask.transform.localPosition = new Vector3(0, 0, 0);
                 break;
-            }
-
         }
     }
 }
