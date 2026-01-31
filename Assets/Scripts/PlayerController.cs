@@ -5,7 +5,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] float currentSpeed = 5f;
     [SerializeField] float steerSpeed = 5f;
-
+    public AudioClip pickupSound;
     public ObjectPool pool;
 
     void Update()
@@ -43,9 +43,15 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag.Equals("Mask"))
         {
+            PlayPickupSound();
             collision.gameObject.transform.SetParent(transform);
             collision.gameObject.transform.localPosition = new Vector3(0,0,0);
             //pool.ReturnObject(collision.gameObject);
         }
+    }
+
+    void PlayPickupSound()
+    {
+        GetComponent<AudioSource>().PlayOneShot(pickupSound);   
     }
 }
