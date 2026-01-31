@@ -6,8 +6,17 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] float currentSpeed = 5f;
-    [SerializeField] float steerSpeed = 5f;
+    [SerializeField] float regularSpeed = 5f;
+
+    const float slowSpeed = 1f;
+
+    const float fastSpeed = 10f;
+
+    float currentSpeed;
+
+    private float maskStartTime;
+    private float maskElapsedTime;
+
     GameObject currentMask;
     public TextMeshProUGUI scoreText;
     public AudioClip pickupSound;
@@ -15,9 +24,23 @@ public class PlayerController : MonoBehaviour
 
     int score;
 
+    void Start()
+    {
+        currentSpeed = regularSpeed;
+    }
+
     void Update()
     {
         MovePlayer();
+        CheckMask();
+    }
+
+    void CheckMask()
+    {
+        if(currentMask != null && (Time.time - maskStartTime) > 5)
+        {
+            RemoveMask();
+        }
     }
 
     private void MovePlayer()
@@ -43,11 +66,11 @@ public class PlayerController : MonoBehaviour
             steer = 1f;
         }
 
-        float moveAmount = move * currentSpeed * Time.deltaTime;
-        float steerAmount = steer * steerSpeed * Time.deltaTime;
+        float moveX = steer * currentSpeed * Time.deltaTime;
+        float moveY = move * currentSpeed * Time.deltaTime;
 
-        transform.Translate(0, moveAmount, 0);
-        transform.Translate(steerAmount, 0, 0);
+        transform.Translate(moveX, 0, 0);
+        transform.Translate(0, moveY, 0);
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -65,29 +88,42 @@ public class PlayerController : MonoBehaviour
     {
         if (currentMask != null)
         {
-            pool.ReturnObject(currentMask);
-            currentMask.transform.SetParent(null, true);
+            RemoveMask();
         }
         GameObject mask = collision.gameObject;
+        maskStartTime = Time.time;
         currentMask = mask;
         mask.transform.SetParent(transform);
         switch (mask.GetComponent<MaskManager>().GetMaskType())
         {
             case MaskType.RedMask:
-                mask.transform.localPosition = new Vector3(0.0651580021f, -0.0199999996f, 0f);
+                mask.transform.localPosition = new Vector3(0.0900000036f, -0.130919993f, 0f);
+                currentSpeed = slowSpeed;
                 break;
 
             case MaskType.GreenMask:
                 mask.transform.localPosition = new Vector3(0.0299999993f, -0.310000002f, 0f);
+                currentSpeed = fastSpeed;
                 break;
 
             case MaskType.YellowMask:
                 mask.transform.localPosition = new Vector3(-0.319999993f, 0.419999987f, 0f);
                 break;
 
+            case MaskType.BlueMask:
+                mask.transform.localPosition = new Vector3(0f, 0.0599999987f, 0f);
+                break;
             default:
                 mask.transform.localPosition = new Vector3(0, 0, 0);
                 break;
         }
+    }
+
+    private void RemoveMask()
+    {
+        pool.ReturnObject(currentMask);
+        currentMask.transform.SetParent(null, true);
+        currentMask = null;
+        currentSpeed = regularSpeed;
     }
 }

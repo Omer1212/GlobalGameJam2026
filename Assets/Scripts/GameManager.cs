@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
         maskSpriteRenderer.sprite = maskSprites[(int)maskType];
         if (maskType == MaskType.RedMask)
         {
-            mask.transform.localScale = new Vector3(0.696743786f, 0.696743786f, 0.696743786f);
+            mask.transform.localScale = new Vector3(0.618082047f, 0.618082047f, 0.618082047f);
         }
         if (maskType == MaskType.GreenMask)
         {
@@ -63,6 +63,10 @@ public class GameManager : MonoBehaviour
         if(maskType == MaskType.YellowMask)
         {
             mask.transform.localScale = new Vector3(0.654830813f, 0.654830813f, 0.654830813f);
+        }
+        if(maskType == MaskType.BlueMask)
+        {
+            mask.transform.localScale = new Vector3(0.462599993f, 0.462599993f, 0.462599993f);
         }
     }
 }
